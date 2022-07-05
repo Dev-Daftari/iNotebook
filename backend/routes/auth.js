@@ -7,7 +7,6 @@ const bcrypt = require('bcryptjs');
 const JWT_SECRET = 'Th7s7sas3cret$c0d3';
 
 var jwt = require('jsonwebtoken');
-var token = jwt.sign({ foo: 'bar' }, 'shhhhh');
 const fetchuser = require('../middleware/fetchuser');
 
 router.post(
@@ -15,7 +14,7 @@ router.post(
   [
     body("name", "Enter a valid name").isLength({ min: 2 }),
     body("email", "Enter a valid email").isEmail(),
-    body("password", "Password must be at least 8 character long").isLength({
+    body("password", "Password must be at least 5 character long").isLength({
       min: 5,
     }),
   ],
