@@ -3,17 +3,62 @@ import { useState } from "react";
 
 const NoteState = (props)=>{
     const notesInitial = 
-        [
-            {
-              "_id": "62c510f11b7816439c2fcda8",
-              "user": "62c45154710aa6fb0c3423ef",
-              "title": "My First Note",
-              "tag": "personal",
-              "description": "This is my first note in iNotebook",
-              "date": "2022-07-06T04:34:57.204Z",
-              "__v": 0
-            }
-          ]
+    [
+        {
+          "_id": "62c510f11b7816439c2fcda8",
+          "user": "62c45154710aa6fb0c3423ef",
+          "title": "My First Note",
+          "tag": "personal",
+          "description": "This is my first note in iNotebook",
+          "date": "2022-07-06T04:34:57.204Z",
+          "__v": 0
+        },
+        {
+          "_id": "62c510f11b7816439c2fcda8",
+          "user": "62c45154710aa6fb0c3423ef",
+          "title": "My First Note",
+          "tag": "personal",
+          "description": "This is my first note in iNotebook",
+          "date": "2022-07-06T04:34:57.204Z",
+          "__v": 0
+        },
+        {
+          "_id": "62c510f11b7816439c2fcda8",
+          "user": "62c45154710aa6fb0c3423ef",
+          "title": "My First Note",
+          "tag": "personal",
+          "description": "This is my first note in iNotebook",
+          "date": "2022-07-06T04:34:57.204Z",
+          "__v": 0
+        },
+        {
+          "_id": "62c510f11b7816439c2fcda8",
+          "user": "62c45154710aa6fb0c3423ef",
+          "title": "My First Note",
+          "tag": "personal",
+          "description": "This is my first note in iNotebook",
+          "date": "2022-07-06T04:34:57.204Z",
+          "__v": 0
+        },
+        {
+          "_id": "62c510f11b7816439c2fcda8",
+          "user": "62c45154710aa6fb0c3423ef",
+          "title": "My First Note",
+          "tag": "personal",
+          "description": "This is my first note in iNotebook",
+          "date": "2022-07-06T04:34:57.204Z",
+          "__v": 0
+        },
+        {
+          "_id": "62c55a0c19255038d9770090",
+          "user": "62c45154710aa6fb0c3423ef",
+          "title": "My Second Note",
+          "tag": "personal",
+          "description": "This is my second note in iNotebook",
+          "date": "2022-07-06T09:46:52.267Z",
+          "__v": 0
+        }
+      ]
     
         const [notes, setNotes] = useState(notesInitial)
     
