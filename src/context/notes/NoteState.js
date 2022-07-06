@@ -14,7 +14,7 @@ const NoteState = (props)=>{
                 method: 'GET', 
               
                 headers: {
-                //   'Content-Type': 'application/json',
+                  'Content-Type': 'application/json',
                   'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjJjNDUxNTQ3MTBhYTZmYjBjMzQyM2VmIn0sImlhdCI6MTY1NzAzOTkyNH0.z9aDz2aDEbnvEBlBCuJmT7bFDmUj41Jen3J-KqIFVS0'
                 }
               });
@@ -32,15 +32,7 @@ const NoteState = (props)=>{
                 },
                 body: JSON.stringify({title,description,tag})
               });
-            const note = {
-                "_id": "62c55a0cwef19fewf255038d9770090",
-                "user": "62c45154710aa6fb0c3423ef",
-                "title": title,
-                "tag": tag,
-                "description": description,
-                "date": "2022-07-06T09:46:52.267Z",
-                "__v": 0
-              };
+              const note = await response.json();
             setNotes(notes.concat(note))
         }
         
@@ -55,7 +47,7 @@ const NoteState = (props)=>{
                 }
               });
               const json = response.json();
-
+              console.log(json);
 
             const newNotes = notes.filter((note)=>{return note._id!==id});
             setNotes(newNotes);
@@ -72,15 +64,20 @@ const NoteState = (props)=>{
                 body: JSON.stringify({title,description, tag})
               });
 
+              const json = await response.json();
+              console.log(json);
+            
+              let newNotes = JSON.parse(JSON.stringify(notes));
 
-
-            for(const note of notes){
+            for(const note of newNotes){
                 if(note._id===id){
                     note.title = title;
                     note.description = description;
                     note.tag = tag;
+                    break;
                 }
             }
+            setNotes(newNotes);
         }
 
 
