@@ -24,8 +24,9 @@ const Login = (props) => {
     // console.log(json);
     if (json.success === true) {
       localStorage.setItem("token", json.authToken);
+      localStorage.setItem("name", json.userName);
       navigate("/");
-      props.showAlert("Logged in successfully!", "success");
+      props.showAlert(`Welcome ${localStorage.getItem('name')}`, "success");
     } else {
       // alert("Invalid Credentials")
       props.showAlert("Invalid Credentials", "danger");
@@ -48,9 +49,6 @@ const Login = (props) => {
             value={credentials.email}
             onChange={onChange}
           />
-          <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
-          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">

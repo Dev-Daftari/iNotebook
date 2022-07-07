@@ -36,3 +36,15 @@
     transform: rotate(360deg);
   }
 }
+
+.dropdown-menu{
+  --bs-dropdown-min-width: 5.5rem;
+}
+.dropdown-item:focus, .dropdown-item:hover {
+  color: var(--bs-dropdown-link-hover-color);
+  background-color: #f8f9fa;
+}
+
+h2{
+  font-family: 'Montserrat', sans-serif;
+}

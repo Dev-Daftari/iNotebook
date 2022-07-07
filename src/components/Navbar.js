@@ -3,13 +3,15 @@ import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = (props) => {
   let navigate = useNavigate();
   let location = useLocation();
   useEffect(() => {}, [location]);
   const handleLogout = (event) => {
     event.preventDefault();
     localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    props.showAlert("Logged out successfully!", "success");
     navigate("/login");
   };
   return (
@@ -85,10 +87,21 @@ const Navbar = () => {
                   </Link>
                 </>
               ) : (
-                <button onClick={handleLogout} className="btn btn-primary mx-1">
-                  {" "}
-                  Logout{" "}
+                // <button onClick={handleLogout} className="btn btn-primary mx-1">
+                //   {" "}
+                //   Logout {localStorage.getItem("name")} {" "}
+                // </button>
+                <div className="dropdown">
+                <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    {localStorage.getItem("name")}
                 </button>
+                <ul className="dropdown-menu my-1.5" aria-labelledby="dropdownMenuButton1">
+                  <li><button onClick={handleLogout} className="btn btn-primary dropdown-item">
+                    {" "}
+                    Logout {" "}
+                  </button></li>
+                </ul>
+              </div>
               )}
             </div>
           </div>
