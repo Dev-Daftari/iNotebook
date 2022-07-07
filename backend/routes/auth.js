@@ -19,17 +19,19 @@ router.post(
     }),
   ],
   async (req, res) => {
+    let success = false;
     //Using post because passwords involved
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() }); // See if the email isn't duplicate
+      return res.status(400).json({success, errors: errors.array() }); // See if the email isn't duplicate
     }
     try {
+      
       let user = await User.findOne({ email: req.body.email }); // await used beacuse it waits till it finds some match
       if (user) {
         return res
           .status(400)
-          .json({ errors: "A user with this email already exists." });
+          .json({ success,errors: "A user with this email already exists." });
       }
       const salt = await bcrypt.genSalt(10);
       const secPass = await bcrypt.hash(req.body.password,salt);
@@ -45,8 +47,8 @@ router.post(
         }
       }
       const authToken = jwt.sign(data, JWT_SECRET);
-
-      res.json({authToken});
+      success = true;
+      res.json({success,authToken});
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");
@@ -61,21 +63,22 @@ router.post(
       body("password", "Password cannot be blank").exists()
     ],
     async (req, res) => {
+      let success = false;
       //Using post because passwords involved
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() }); // See if the email isn't duplicate
+        return res.status(400).json({ success,errors: errors.array() }); // See if the email isn't duplicate
     }
 
     const {email, password} = req.body;
     try{ 
         let user = await User.findOne({email});
         if(!user){
-            return res.status(400).json({error: "Incorrect Credentials"});
+            return res.status(400).json({success,error: "Incorrect Credentials"});
         }
         const passwordCompare = await bcrypt.compare(password,user.password);
         if(!passwordCompare){
-            return res.status(400).json({error: "Incorrect Credentials"});
+            return res.status(400).json({success,error: "Incorrect Credentials"});
 
         }
         const data = {
@@ -84,7 +87,8 @@ router.post(
             }
           }
           const authToken = jwt.sign(data, JWT_SECRET);
-          res.json({authToken});
+          success = true;
+          res.json({success,authToken});
     }catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
