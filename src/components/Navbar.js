@@ -63,7 +63,7 @@ const Navbar = (props) => {
                 placeholder="Search"
                 aria-label="Search"
               />
-              <button className="btn btn-outline-light" type="submit">
+              <button disabled = {!localStorage.getItem("token")} className="btn btn-outline-light" type="submit">
                 Search
               </button>
             </form>
