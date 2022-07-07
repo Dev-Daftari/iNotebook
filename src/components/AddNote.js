@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import NoteContext from "../context/notes/NoteContext";
-const Addnote = () => {
+const Addnote = (props) => {
   const [note, setNote] = useState({
     title: "",
     description: "",
@@ -11,14 +11,15 @@ const Addnote = () => {
   const handleClick = (event) => {
     event.preventDefault();
     addNote(note.title, note.description, note.tag);
-    setNote({title:"", description:"", tag:""})
+    setNote({ title: "", description: "", tag: "" });
+    props.showAlert("Added note successfully", "success");
   };
   const onChange = (event) => {
     setNote({ ...note, [event.target.name]: event.target.value });
   };
   return (
     <div className="container my-3">
-      <h1>Add a Note</h1>
+      <h2 className="text-center">Add a Note</h2>
       <form>
         <div className="mb-3">
           <label htmlFor="title" className="form-label">
@@ -32,7 +33,7 @@ const Addnote = () => {
             aria-describedby="emailHelp"
             onChange={onChange}
             value={note.title}
-            minLength = {5}
+            minLength={5}
             required
           />
         </div>
@@ -60,7 +61,7 @@ const Addnote = () => {
             value={note.description}
             type="text"
             rows="3"
-            minLength = {5}
+            minLength={5}
             required
           ></textarea>
         </div>
@@ -78,7 +79,12 @@ const Addnote = () => {
             value={note.tag}
           />
         </div>
-        <button disabled = {note.title.length < 5 || note.description.length < 5} type="submit" className="btn btn-primary" onClick={handleClick}>
+        <button
+          disabled={note.title.length < 5 || note.description.length < 5}
+          type="submit"
+          className="btn btn-primary"
+          onClick={handleClick}
+        >
           Add Note
         </button>
       </form>
