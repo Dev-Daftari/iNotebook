@@ -163,24 +163,29 @@ const Notes = (props) => {
       </div>
       <div className="row my-3">
         <h2 className="text-center">Your Notes</h2>
-      
-        {notes.filter((note)=>{
-          if(search === "") return note;
-          else{
-            return Object.values(note).join(" ").toLowerCase().includes(search.toLowerCase().trim());
-          }
-        }).map((note) => {
-          return (
-            <Noteitem
-              key={note._id}
-              note={note}
-              updateNote={updateNote}
-              showAlert={props.showAlert}
-            />
-          );
-        })}
+
+        {notes
+          .filter((note) => {
+            if (search === "") return note;
+            else {
+              return Object.values(note)
+                .join(" ")
+                .toLowerCase()
+                .includes(search.toLowerCase().trim());
+            }
+          })
+          .map((note) => {
+            return (
+              <Noteitem
+                key={note._id}
+                note={note}
+                updateNote={updateNote}
+                showAlert={props.showAlert}
+              />
+            );
+          })}
         <div className="container my-3">
-          {(notes.length === 0) && "No Notes To Display"}
+          {notes.length === 0 && "No Notes To Display"}
         </div>
       </div>
     </>

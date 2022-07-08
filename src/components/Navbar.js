@@ -25,12 +25,12 @@ const Navbar = (props) => {
     setSearch(term);
     console.log(search);
     // searchNotes(term);
-  }
-  
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // searchNotes(search);
-  }
+  };
 
   return (
     <div>
@@ -80,10 +80,14 @@ const Navbar = (props) => {
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
-                disabled = {!localStorage.getItem("token")}
-                onChange = {handleOnChange}
+                disabled={!localStorage.getItem("token")}
+                onChange={handleOnChange}
               />
-              <button disabled = {!localStorage.getItem("token")} className="btn btn-outline-light"  type="submit">
+              <button
+                disabled={!localStorage.getItem("token")}
+                className="btn btn-outline-light"
+                type="submit"
+              >
                 Search
               </button>
             </form>
@@ -112,16 +116,30 @@ const Navbar = (props) => {
                 //   Logout {localStorage.getItem("name")} {" "}
                 // </button>
                 <div className="dropdown">
-                <button className="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                  <button
+                    className="btn btn-success dropdown-toggle"
+                    type="button"
+                    id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
                     {localStorage.getItem("name")}
-                </button>
-                <ul className="dropdown-menu my-1.5" aria-labelledby="dropdownMenuButton1">
-                  <li><button onClick={handleLogout} className="btn btn-primary dropdown-item">
-                    {" "}
-                    Logout {" "}
-                  </button></li>
-                </ul>
-              </div>
+                  </button>
+                  <ul
+                    className="dropdown-menu my-1.5"
+                    aria-labelledby="dropdownMenuButton1"
+                  >
+                    <li>
+                      <button
+                        onClick={handleLogout}
+                        className="btn btn-primary dropdown-item"
+                      >
+                        {" "}
+                        Logout{" "}
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               )}
             </div>
           </div>
