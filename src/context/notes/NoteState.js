@@ -6,6 +6,7 @@ const NoteState = (props) => {
   const notesInitial = [];
 
   const [notes, setNotes] = useState(notesInitial);
+  const [search, setSearch] = useState("");
 
   // Fetch all notes from the database
 
@@ -19,6 +20,7 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json();
+    console.log(json);
     setNotes(json);
   };
 
@@ -70,7 +72,7 @@ const NoteState = (props) => {
     console.log(json);
 
     let newNotes = JSON.parse(JSON.stringify(notes));
-
+    
     for (const note of newNotes) {
       if (note._id === id) {
         note.title = title;
@@ -81,10 +83,33 @@ const NoteState = (props) => {
     }
     setNotes(newNotes);
   };
+  
+  const searchNotes = (term) => {
+    // const response = await fetch(`${host}/api/notes/fetchallnotes`, {
+      //   method: "GET",
+      
+      //   headers: {
+        //     "Content-Type": "application/json",
+        //     "auth-token": localStorage.getItem("token"),
+        //   },
+        // });
+        // const json = await response.json();
+        // console.log(json);
+    //     let newNotes = JSON.parse(JSON.stringify(notes));
+    //     const NewNotes = newNotes.filter((note) => {
+    //     if(term === "") return note;
+    //     else{
+    //       return note.title.toLowerCase().includes(term.toLowerCase());
+    //     }
+    // });
+    // console.log(NewNotes);
+    // setNotes(NewNotes);
+    setSearch(term);
+  };
 
   return (
     <NoteContext.Provider
-      value={{ notes, setNotes, addNote, deleteNote, editNote, getNotes }}
+      value={{ notes, setNotes, addNote, deleteNote, editNote, getNotes, search , setSearch, searchNotes }}
     >
       {props.children}
     </NoteContext.Provider>

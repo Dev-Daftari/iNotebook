@@ -17,7 +17,7 @@ const Notes = (props) => {
     setNote({ ...note, [event.target.name]: event.target.value });
   };
   const context = useContext(NoteContext);
-  const { notes, getNotes, editNote } = context;
+  const { notes, getNotes, editNote, search } = context;
   useEffect(() => {
     if (localStorage.getItem("token")) {
       getNotes();
@@ -163,10 +163,13 @@ const Notes = (props) => {
       </div>
       <div className="row my-3">
         <h2 className="text-center">Your Notes</h2>
-        <div className="container my-3">
-          {notes.length === 0 && "No Notes To Display"}
-        </div>
-        {notes.map((note) => {
+      
+        {notes.filter((note)=>{
+          if(search === "") return note;
+          else{
+            return Object.values(note).join(" ").toLowerCase().includes(search.toLowerCase().trim());
+          }
+        }).map((note) => {
           return (
             <Noteitem
               key={note._id}
@@ -176,6 +179,9 @@ const Notes = (props) => {
             />
           );
         })}
+        <div className="container my-3">
+          {(notes.length === 0) && "No Notes To Display"}
+        </div>
       </div>
     </>
   );

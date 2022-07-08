@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import NoteContext from "../context/notes/NoteContext";
 
 const Navbar = (props) => {
+  // const [search, setSearch] = useState("")
+  const context = useContext(NoteContext);
+  const { search, setSearch } = context;
   let navigate = useNavigate();
   let location = useLocation();
   useEffect(() => {}, [location]);
@@ -14,6 +18,20 @@ const Navbar = (props) => {
     props.showAlert("Logged out successfully!", "success");
     navigate("/login");
   };
+
+  const handleOnChange = (event) => {
+    var term = event.target.value;
+    // setSearch({...search, [event.target.name] : term});
+    setSearch(term);
+    console.log(search);
+    // searchNotes(term);
+  }
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // searchNotes(search);
+  }
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
@@ -56,14 +74,16 @@ const Navbar = (props) => {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex mx-2" role="search">
+            <form className="d-flex mx-2" role="search" onSubmit={handleSubmit}>
               <input
                 className="form-control me-2"
                 type="search"
                 placeholder="Search"
                 aria-label="Search"
+                disabled = {!localStorage.getItem("token")}
+                onChange = {handleOnChange}
               />
-              <button disabled = {!localStorage.getItem("token")} className="btn btn-outline-light" type="submit">
+              <button disabled = {!localStorage.getItem("token")} className="btn btn-outline-light"  type="submit">
                 Search
               </button>
             </form>
