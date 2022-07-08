@@ -37,7 +37,7 @@ const Navbar = (props) => {
       <nav className="navbar navbar-expand-lg bg-dark navbar-dark">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/">
-            iNotebook
+          iNotebook
           </Link>
           <button
             className="navbar-toggler"
@@ -123,7 +123,7 @@ const Navbar = (props) => {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    {localStorage.getItem("name")}
+                    <i className="fa-solid fa-user mx-1"></i>{localStorage.getItem("name")}
                   </button>
                   <ul
                     className="dropdown-menu my-1.5"
@@ -135,7 +135,7 @@ const Navbar = (props) => {
                         className="btn btn-primary dropdown-item"
                       >
                         {" "}
-                        Logout{" "}
+                        <i className="fa-solid fa-right-from-bracket"></i>Logout{" "}
                       </button>
                     </li>
                   </ul>
